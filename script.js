@@ -15,6 +15,9 @@
 //     }
 // }, 1000);
 
+let soloDia = false
+let estaDiasTotales = true
+
 function onSecondChange(callback) {
   let stopped = false
 
@@ -49,13 +52,18 @@ function diasEnUnMes(año, mes) {
   return new Date(año, mes + 1, 0).getDate()
 }
 
-let diasActuales, horasActuales, minutosActuales, segundosActuales
+let diasActuales,
+  horasActuales,
+  minutosActuales,
+  segundosActuales,
+  diasActualesTotales
 
 //* 21 de noviembre
 const finClases = new Date(2025, 10, 21, 0, 0, 0, 0)
 
-document.getElementById('fecha-final').innerText =
-  finClases.toLocaleDateString()
+document.getElementById(
+  'fecha-final'
+).innerText = `${finClases.toLocaleDateString()} ${finClases.getHours()}:${finClases.getMinutes()}:${finClases.getSeconds()}`
 
 function obtenerTiempoRestante() {
   const ahora = new Date()
@@ -64,24 +72,64 @@ function obtenerTiempoRestante() {
 
   for (let i = 0; i < finClases.getMonth() - ahora.getMonth() + 1; i++) {
     if (finClases.getMonth() === ahora.getMonth()) {
-      diasActuales = finClases.getDate() - ahora.getDate()
+      diasActuales = finClases.getDate() - ahora.getDate() - 1
       break
     }
     if (i === 0) {
       diasActuales += diasEnUnMes(2025, ahora.getMonth()) - ahora.getDate()
     } else if (i === finClases.getMonth() - ahora.getMonth()) {
       diasActuales += finClases.getDate()
-      console.log('nigger2')
     } else {
       diasActuales += diasEnUnMes(2025, ahora.getMonth() + i)
     }
   }
 
-  diasActuales--
+  diasActualesTotales = diasActuales
 
-  horasActuales = 23 - ahora.getHours()
-  minutosActuales = 59 - ahora.getMinutes()
-  segundosActuales = 60 - ahora.getSeconds()
+  if (!soloDia) {
+    if (
+      finClases.getSeconds() === 0 &&
+      finClases.getMinutes() === 0 &&
+      finClases.getHours() === 0
+    ) {
+      horasActuales = 23 - ahora.getHours()
+      minutosActuales = 59 - ahora.getMinutes()
+      segundosActuales = 60 - ahora.getSeconds()
+    } else {
+      let diffMs = finClases - ahora - diasActualesTotales * 24 * 60 * 60 * 1000
+      if (diffMs < 0) diffMs = 0 // por si ya pasó la fecha
+
+      horasActuales = Math.floor(diffMs / (1000 * 60 * 60))
+      diffMs -= horasActuales * (1000 * 60 * 60)
+
+      if (horasActuales === 24) {
+        horasActuales = 0
+        diasActualesTotales++
+        diasActuales++
+      }
+
+      minutosActuales = Math.floor(diffMs / (1000 * 60))
+      diffMs -= minutosActuales * (1000 * 60)
+
+      segundosActuales = Math.floor(diffMs / 1000)
+    }
+  }
+
+  if (!estaDiasTotales) {
+    let mesAct = ahora.getMonth()
+    let diaAct = ahora.getDate()
+    for (let i = 0; i <= diasActuales; i++) {
+      const diaAProbar = new Date(2025, mesAct, diaAct, 0, 0, 0).getDay()
+      if (diaAProbar === 0 || diaAProbar === 6) {
+        diasActuales--
+      }
+      diaAct++
+      if (diaAct > diasEnUnMes(2025, mesAct)) {
+        mesAct++
+        diaAct = 1
+      }
+    }
+  }
 }
 
 obtenerTiempoRestante() // cálculo inicial
@@ -100,8 +148,17 @@ function obtenerDigito(num, digito) {
   return num % 10
 }
 
-function cambioDigito(claseDigito, digito, reinicio) {
+function cambioDigito(claseDigito, digito, reinicio, cambioNum = false) {
   const sigNum = digito - 1 < 0 ? reinicio : digito - 1
+  if (cambioNum) {
+    claseDigito.numSiguiente = sigNum
+    if (!claseDigito.dActual) {
+      claseDigito.caja1Html.innerText = digito
+    } else {
+      claseDigito.caja2Html.innerText = digito
+    }
+    claseDigito.cambio(sigNum)
+  }
   if (claseDigito.numSiguiente !== sigNum) {
     claseDigito.cambio(sigNum)
   }
@@ -142,7 +199,7 @@ const arrDigitosHoras = [
     obtenerDigito(horasActuales, 0) === 0
       ? obtenerDigito(horasActuales, 1) > 0
         ? 9
-        : 4
+        : 3
       : obtenerDigito(horasActuales, 0) - 1
   ),
 ]
@@ -197,9 +254,21 @@ function actualizarContador() {
   cambioDigito(
     arrDigitosHoras[1],
     obtenerDigito(horasActuales, 0),
-    obtenerDigito(horasActuales, 1) > 0 ? 9 : 4
+    obtenerDigito(horasActuales, 1) > 0 ? 9 : 3
   )
 
   cambioDigito(arrDigitosDias[0], obtenerDigito(diasActuales, 1), 9)
   cambioDigito(arrDigitosDias[1], obtenerDigito(diasActuales, 0), 9)
 }
+
+const tituloDiasHtml = document.getElementById('titulo-dias')
+
+tituloDiasHtml.addEventListener('click', () => {
+  estaDiasTotales = !estaDiasTotales
+  tituloDiasHtml.innerText = estaDiasTotales ? 'DIAS TOTALES' : 'DIAS ESCOLARES'
+  soloDia = true
+  obtenerTiempoRestante()
+  soloDia = false
+  cambioDigito(arrDigitosDias[0], obtenerDigito(diasActuales, 1), 9, true)
+  cambioDigito(arrDigitosDias[1], obtenerDigito(diasActuales, 0), 9, true)
+})
