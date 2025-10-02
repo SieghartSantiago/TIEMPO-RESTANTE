@@ -24,6 +24,8 @@ body {
 
   perspective: 1000px;
   background-color: #555;
+
+  transform: scale(1.5);
 }
 
 .fecha-final {
