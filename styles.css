@@ -28,6 +28,12 @@ body {
   transform: scale(1.5);
 }
 
+@media screen and (max-width: 600px) {
+  body {
+    transform: scale(0.9);
+  }
+}
+
 .fecha-final {
   color: #aaa;
   font-weight: bolder;
