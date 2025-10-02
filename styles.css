@@ -1,0 +1,116 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+  --altura-digito: 60px;
+  --ancho-digito: calc(var(--altura-digito) / 2);
+  --tamanio-digito: 2.3rem;
+}
+
+body {
+  height: 100dvh;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+
+  perspective: 1000px;
+  background-color: #555;
+}
+
+.fecha-final {
+  color: #aaa;
+  font-weight: bolder;
+  margin-top: 10px;
+  font-family: monospace;
+}
+
+.fecha-final span {
+  font-family: monospace;
+}
+
+.contenedor-general {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(var(--ancho-digito) * 12);
+  height: calc(var(--altura-digito) * 2);
+  border: 1px solid #050505;
+  border-radius: 5px;
+  padding-inline: 7px;
+  background-color: #333;
+}
+
+.dos-puntos {
+  color: #eee;
+  font-size: var(--tamanio-digito);
+  height: calc(var(--altura-digito) + 25px);
+  padding-top: 10px;
+  font-family: 'Courier Prime', monospace;
+}
+
+.contenedor-seccion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: calc(var(--altura-digito) + 25px);
+  justify-content: space-between;
+  color: #eee;
+}
+
+.contenedor {
+  display: flex;
+}
+
+.contenedor-digito {
+  position: relative;
+  width: 30px;
+  height: 60px;
+}
+
+.digito {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  width: 30px;
+  padding-top: 5px;
+  font-size: var(--tamanio-digito);
+  background-color: #111;
+  color: #f01515;
+  position: absolute;
+  backface-visibility: hidden; /* oculta la cara de atrás */
+  transform-style: preserve-3d; /* asegura que respete el 3D */
+  font-family: 'Courier Prime', monospace;
+}
+
+.contenedor-digito:last-of-type {
+  margin-left: 1px;
+}
+
+.digitoActual {
+  transition: transform 0.5s linear;
+  transform: rotateX(0) translateY(0) translateZ(0);
+}
+
+.digitoPreparado {
+  transition: none;
+  transform: rotateX(90deg) translateY(30px) translateZ(-30px);
+}
+
+.digitoAfuera {
+  transition: transform 0.5s linear;
+  transform: rotateX(90deg) translateY(-30px) translateZ(30px);
+}
+
+.titulo {
+  font-size: 0.6rem;
+}
