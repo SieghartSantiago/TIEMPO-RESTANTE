@@ -16,7 +16,7 @@
 // }, 1000);
 
 const arrFeriados = [new Date(2025, 9, 10)]
-const arrJornadas = [new Date(2025, 9, 21)]
+const arrJornadas = [new Date(2025, 9, 21), new Date(2025, 10, 26)]
 
 let soloDia = false
 let estaDiasTotales = true
@@ -59,7 +59,7 @@ function diasEnUnMes(año, mes) {
 let diasActuales, horasActuales, minutosActuales, segundosActuales
 
 //* 21 de noviembre
-const finClases = new Date(2025, 10, 21, 0, 0, 0, 0)
+const finClases = new Date(2025, 10, 28, 0, 0, 0, 0)
 
 function dosDigitos(num) {
   return String(num).padStart(2, '0')
