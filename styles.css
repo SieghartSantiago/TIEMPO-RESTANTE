@@ -34,6 +34,14 @@ body {
   }
 }
 
+.paro-de-tiempo {
+  color: #aaa;
+  font-weight: bolder;
+  margin-bottom: 10px;
+  height: 12.5px;
+  font-family: monospace;
+}
+
 .fecha-final {
   color: #aaa;
   font-weight: bolder;
@@ -61,7 +69,6 @@ body {
   color: #eee;
   font-size: var(--tamanio-digito);
   height: calc(var(--altura-digito) + 25px);
-  padding-top: 10px;
   font-family: 'Courier Prime', monospace;
 }
 

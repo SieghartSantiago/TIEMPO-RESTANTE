@@ -31,12 +31,7 @@ class Digito {
   }
 
   cambio(numSiguiente) {
-    if (this.enAnimacion) {
-      setTimeout(() => {
-        this.cambio(numSiguiente)
-      }, 500);
-      return
-    }
+    if (this.enAnimacion) return false
 
     this.enAnimacion = true
 
@@ -64,5 +59,7 @@ class Digito {
 
       this.enAnimacion = false
     }, 500)
+
+    return true
   }
 }
