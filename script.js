@@ -1,19 +1,5 @@
-// const contenedorDiasHtml = document.getElementById('dias')
-
-// const arrDigitos = [new Digito(5, 4), new Digito(0, 9)]
-
-// contenedorDiasHtml.appendChild(arrDigitos[0].crearHtml())
-// contenedorDiasHtml.appendChild(arrDigitos[1].crearHtml())
-
-// setInterval(() => {
-//     const numSiguiente = arrDigitos[1].numSiguiente
-//     if (numSiguiente === 9) {
-//         arrDigitos[0].cambio(arrDigitos[0].numSiguiente - 1)
-//         arrDigitos[1].cambio(8)
-//     } else {
-//         arrDigitos[1].cambio(numSiguiente - 1 < 0 ? 9 : numSiguiente - 1)
-//     }
-// }, 1000);
+//* 21 de noviembre
+const finClases = new Date(2025, 10, 28, 0, 0, 0, 0)
 
 const arrFeriados = [
   new Date(2025, 9, 10),
@@ -26,33 +12,6 @@ let soloDia = false
 let estaDiasTotales = true
 let timerParado = false
 
-// function onSecondChange(callback) {
-//   let stopped = false
-
-//   function scheduleNext() {
-//     if (stopped) return
-//     const now = new Date()
-//     const msToNextSecond = 1000 - now.getMilliseconds()
-
-//     setTimeout(() => {
-//       if (stopped) return
-//       const tick = new Date()
-//       // llamamos con la hora actual (ya cambió el segundero)
-//       callback(tick)
-//       // recalculamos para mantener sincronía y evitar drift
-//       scheduleNext()
-//     }, msToNextSecond)
-//   }
-
-//   scheduleNext()
-
-//   return {
-//     stop() {
-//       stopped = true
-//     },
-//   }
-// }
-
 function diasEnUnMes(año, mes) {
   // Los meses en JavaScript son de base cero (0 = enero, 1 = febrero, etc.)
   // Por lo tanto, para obtener el último día del mes, pasamos el mes siguiente y el día 0.
@@ -61,9 +20,6 @@ function diasEnUnMes(año, mes) {
 }
 
 let diasActuales, horasActuales, minutosActuales, segundosActuales
-
-//* 21 de noviembre
-const finClases = new Date(2025, 10, 28, 0, 0, 0, 0)
 
 function dosDigitos(num) {
   return String(num).padStart(2, '0')
@@ -167,12 +123,6 @@ function obtenerTiempoRestante() {
   }
 }
 
-// obtenerTiempoRestante() // cálculo inicial
-// const ticker = onSecondChange(() => {
-//   obtenerTiempoRestante()
-//   actualizarContador()
-// })
-
 function cambiarSegundo() {
   obtenerTiempoRestante()
   actualizarContador()
@@ -180,11 +130,6 @@ function cambiarSegundo() {
     cambiarSegundo()
   }, 100)
 }
-
-// diasActuales = 1
-// horasActuales = 0
-// minutosActuales = 0
-// segundosActuales = 5
 
 function obtenerDigito(num, digito) {
   if (digito === 1) return Math.trunc(num / 10) % 10
@@ -215,18 +160,8 @@ function actualizarContador() {
 obtenerTiempoRestante()
 
 const arrDigitosDias = [
-  new Digito(
-    obtenerDigito(diasActuales, 1),
-    obtenerDigito(diasActuales, 1) === 0
-      ? 9
-      : obtenerDigito(diasActuales, 1) - 1
-  ),
-  new Digito(
-    obtenerDigito(diasActuales, 0),
-    obtenerDigito(diasActuales, 0) === 0
-      ? 9
-      : obtenerDigito(diasActuales, 0) - 1
-  ),
+  new Digito(obtenerDigito(diasActuales, 1)),
+  new Digito(obtenerDigito(diasActuales, 0)),
 ]
 
 contenedorDiasHtml.appendChild(arrDigitosDias[0].crearHtml())
