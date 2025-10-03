@@ -15,7 +15,11 @@
 //     }
 // }, 1000);
 
-const arrFeriados = [new Date(2025, 9, 10), new Date(2025, 10, 21), new Date(2025, 10, 24)]
+const arrFeriados = [
+  new Date(2025, 9, 10),
+  new Date(2025, 10, 21),
+  new Date(2025, 10, 24),
+]
 const arrJornadas = [new Date(2025, 9, 21), new Date(2025, 10, 26)]
 
 let soloDia = false
@@ -149,39 +153,14 @@ function obtenerTiempoRestante() {
           ? 'En jornada'
           : 'En fin de semana'
 
-      cambioDigito(
-        arrDigitosSegundos[0],
-        obtenerDigito(segundosActuales, 1),
-        5,
-        true
-      )
-      cambioDigito(
-        arrDigitosSegundos[1],
-        obtenerDigito(segundosActuales, 0),
-        9,
-        true
-      )
+      arrDigitosSegundos[0].cambio(obtenerDigito(segundosActuales, 1))
+      arrDigitosSegundos[1].cambio(obtenerDigito(segundosActuales, 0))
 
-      cambioDigito(
-        arrDigitosMinutos[0],
-        obtenerDigito(minutosActuales, 1),
-        5,
-        true
-      )
-      cambioDigito(
-        arrDigitosMinutos[1],
-        obtenerDigito(minutosActuales, 0),
-        9,
-        true
-      )
+      arrDigitosMinutos[0].cambio(obtenerDigito(minutosActuales, 1))
+      arrDigitosMinutos[1].cambio(obtenerDigito(minutosActuales, 0))
 
-      cambioDigito(arrDigitosHoras[0], obtenerDigito(horasActuales, 1), 2, true)
-      cambioDigito(
-        arrDigitosHoras[1],
-        obtenerDigito(horasActuales, 0),
-        obtenerDigito(horasActuales, 1) > 0 ? 9 : 3,
-        true
-      )
+      arrDigitosHoras[0].cambio(obtenerDigito(horasActuales, 1))
+      arrDigitosHoras[1].cambio(obtenerDigito(horasActuales, 0))
 
       timerParado = true
     }
@@ -212,22 +191,6 @@ function obtenerDigito(num, digito) {
   return num % 10
 }
 
-function cambioDigito(claseDigito, digito, reinicio, cambioNum = false) {
-  const sigNum = digito - 1 < 0 ? reinicio : digito - 1
-  if (cambioNum) {
-    claseDigito.numSiguiente = sigNum
-    if (!claseDigito.dActual) {
-      claseDigito.caja1Html.innerText = digito
-    } else {
-      claseDigito.caja2Html.innerText = digito
-    }
-    claseDigito.cambio(sigNum)
-  }
-  if (claseDigito.numSiguiente !== sigNum) {
-    claseDigito.cambio(sigNum)
-  }
-}
-
 const contenedorDiasHtml = document.getElementById('dias'),
   contenedorHorasHtml = document.getElementById('horas'),
   contenedorMinutosHtml = document.getElementById('minutos'),
@@ -236,21 +199,17 @@ const contenedorDiasHtml = document.getElementById('dias'),
 function actualizarContador() {
   if (comprobarSiEsFeriadoOJornada(new Date()) > 0 && !estaDiasTotales) return
 
-  cambioDigito(arrDigitosSegundos[0], obtenerDigito(segundosActuales, 1), 5)
-  cambioDigito(arrDigitosSegundos[1], obtenerDigito(segundosActuales, 0), 9)
+  arrDigitosSegundos[0].cambio(obtenerDigito(segundosActuales, 1))
+  arrDigitosSegundos[1].cambio(obtenerDigito(segundosActuales, 0))
 
-  cambioDigito(arrDigitosMinutos[0], obtenerDigito(minutosActuales, 1), 5)
-  cambioDigito(arrDigitosMinutos[1], obtenerDigito(minutosActuales, 0), 9)
+  arrDigitosMinutos[0].cambio(obtenerDigito(minutosActuales, 1))
+  arrDigitosMinutos[1].cambio(obtenerDigito(minutosActuales, 0))
 
-  cambioDigito(arrDigitosHoras[0], obtenerDigito(horasActuales, 1), 2)
-  cambioDigito(
-    arrDigitosHoras[1],
-    obtenerDigito(horasActuales, 0),
-    obtenerDigito(horasActuales, 1) > 0 ? 9 : 3
-  )
+  arrDigitosHoras[0].cambio(obtenerDigito(horasActuales, 1))
+  arrDigitosHoras[1].cambio(obtenerDigito(horasActuales, 0))
 
-  cambioDigito(arrDigitosDias[0], obtenerDigito(diasActuales, 1), 9)
-  cambioDigito(arrDigitosDias[1], obtenerDigito(diasActuales, 0), 9)
+  arrDigitosDias[0].cambio(obtenerDigito(diasActuales, 1))
+  arrDigitosDias[1].cambio(obtenerDigito(diasActuales, 0))
 }
 
 obtenerTiempoRestante()
@@ -274,56 +233,24 @@ contenedorDiasHtml.appendChild(arrDigitosDias[0].crearHtml())
 contenedorDiasHtml.appendChild(arrDigitosDias[1].crearHtml())
 
 const arrDigitosHoras = [
-  new Digito(
-    obtenerDigito(horasActuales, 1),
-    obtenerDigito(horasActuales, 1) === 0
-      ? 2
-      : obtenerDigito(horasActuales, 1) - 1
-  ),
-  new Digito(
-    obtenerDigito(horasActuales, 0),
-    obtenerDigito(horasActuales, 0) === 0
-      ? obtenerDigito(horasActuales, 1) > 0
-        ? 9
-        : 3
-      : obtenerDigito(horasActuales, 0) - 1
-  ),
+  new Digito(obtenerDigito(horasActuales, 1)),
+  new Digito(obtenerDigito(horasActuales, 0)),
 ]
 
 contenedorHorasHtml.appendChild(arrDigitosHoras[0].crearHtml())
 contenedorHorasHtml.appendChild(arrDigitosHoras[1].crearHtml())
 
 const arrDigitosMinutos = [
-  new Digito(
-    obtenerDigito(minutosActuales, 1),
-    obtenerDigito(minutosActuales, 1) === 0
-      ? 5
-      : obtenerDigito(minutosActuales, 1) - 1
-  ),
-  new Digito(
-    obtenerDigito(minutosActuales, 0),
-    obtenerDigito(minutosActuales, 0) === 0
-      ? 9
-      : obtenerDigito(minutosActuales, 0) - 1
-  ),
+  new Digito(obtenerDigito(minutosActuales, 1)),
+  new Digito(obtenerDigito(minutosActuales, 0)),
 ]
 
 contenedorMinutosHtml.appendChild(arrDigitosMinutos[0].crearHtml())
 contenedorMinutosHtml.appendChild(arrDigitosMinutos[1].crearHtml())
 
 const arrDigitosSegundos = [
-  new Digito(
-    obtenerDigito(segundosActuales, 1),
-    obtenerDigito(segundosActuales, 1) === 0
-      ? 5
-      : obtenerDigito(segundosActuales, 1) - 1
-  ),
-  new Digito(
-    obtenerDigito(segundosActuales, 0),
-    obtenerDigito(segundosActuales, 0) === 0
-      ? 9
-      : obtenerDigito(segundosActuales, 0) - 1
-  ),
+  new Digito(obtenerDigito(segundosActuales, 1)),
+  new Digito(obtenerDigito(segundosActuales, 0)),
 ]
 
 contenedorSegundosHtml.appendChild(arrDigitosSegundos[0].crearHtml())
@@ -337,46 +264,15 @@ tituloDiasHtml.addEventListener('click', () => {
     timerParado = false
     paroDeTiempoHtml.innerText = ''
     obtenerTiempoRestante()
-    cambioDigito(
-      arrDigitosSegundos[0],
-      obtenerDigito(segundosActuales, 1),
-      5,
-      true
-    )
-    cambioDigito(
-      arrDigitosSegundos[1],
-      obtenerDigito(segundosActuales, 0),
-      9,
-      true
-    )
-
-    cambioDigito(
-      arrDigitosMinutos[0],
-      obtenerDigito(minutosActuales, 1),
-      5,
-      true
-    )
-    cambioDigito(
-      arrDigitosMinutos[1],
-      obtenerDigito(minutosActuales, 0),
-      9,
-      true
-    )
-
-    cambioDigito(arrDigitosHoras[0], obtenerDigito(horasActuales, 1), 2, true)
-    cambioDigito(
-      arrDigitosHoras[1],
-      obtenerDigito(horasActuales, 0),
-      obtenerDigito(horasActuales, 1) > 0 ? 9 : 3,
-      true
-    )
+    actualizarContador()
   }
   tituloDiasHtml.innerText = estaDiasTotales ? 'DIAS TOTALES' : 'DIAS ESCOLARES'
   soloDia = true
   obtenerTiempoRestante()
   soloDia = false
-  cambioDigito(arrDigitosDias[0], obtenerDigito(diasActuales, 1), 9, true)
-  cambioDigito(arrDigitosDias[1], obtenerDigito(diasActuales, 0), 9, true)
+
+  arrDigitosDias[0].cambio(obtenerDigito(diasActuales, 1))
+  arrDigitosDias[1].cambio(obtenerDigito(diasActuales, 0))
 })
 
 cambiarSegundo()

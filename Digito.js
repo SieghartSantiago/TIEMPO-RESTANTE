@@ -1,7 +1,6 @@
 class Digito {
-  constructor(numInicial, numSiguiente) {
+  constructor(numInicial) {
     this.numActual = numInicial
-    this.numSiguiente = numSiguiente
 
     this.caja1Html
     this.caja2Html
@@ -13,7 +12,6 @@ class Digito {
   crearHtml() {
     const caja1Html = document.createElement('div')
     caja1Html.classList.add('digito', 'digitoPreparado')
-    caja1Html.innerText = this.numSiguiente
 
     this.caja1Html = caja1Html
 
@@ -32,13 +30,20 @@ class Digito {
 
   cambio(numSiguiente) {
     if (this.enAnimacion) return false
+    if (this.numActual === numSiguiente) return false
+
+    const digitoPorPoner = !this.dActual ? this.caja1Html : this.caja2Html
+
+    digitoPorPoner.innerText = numSiguiente
 
     this.enAnimacion = true
 
     this.caja1Html.classList.remove(
       !this.dActual ? 'digitoPreparado' : 'digitoActual'
     )
-    this.caja1Html.classList.add(!this.dActual ? 'digitoActual' : 'digitoAfuera')
+    this.caja1Html.classList.add(
+      !this.dActual ? 'digitoActual' : 'digitoAfuera'
+    )
     this.caja2Html.classList.remove(
       this.dActual ? 'digitoPreparado' : 'digitoActual'
     )
@@ -50,10 +55,9 @@ class Digito {
       digitoFuera.classList.remove('digitoAfuera')
       digitoFuera.classList.add('digitoPreparado')
 
-      this.numActual = this.numSiguiente
-      this.numSiguiente = numSiguiente
+      this.numActual = numSiguiente
 
-      digitoFuera.innerText = this.numSiguiente
+      digitoFuera.innerText = numSiguiente
 
       this.dActual = !this.dActual
 
