@@ -16,7 +16,7 @@
 // }, 1000);
 
 const arrFeriados = [new Date(2025, 9, 10)]
-const arrJornadas = []
+const arrJornadas = [new Date(2025, 9, 21)]
 
 let soloDia = false
 let estaDiasTotales = true
