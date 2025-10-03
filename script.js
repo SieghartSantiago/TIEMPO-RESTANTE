@@ -15,7 +15,7 @@
 //     }
 // }, 1000);
 
-const arrFeriados = [new Date(2025, 9, 10)]
+const arrFeriados = [new Date(2025, 9, 10), new Date(2025, 10, 21), new Date(2025, 10, 24)]
 const arrJornadas = [new Date(2025, 9, 21), new Date(2025, 10, 26)]
 
 let soloDia = false
