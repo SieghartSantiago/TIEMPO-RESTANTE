@@ -29,8 +29,7 @@ class Digito {
   }
 
   cambio(numSiguiente) {
-    if (this.enAnimacion) return false
-    if (this.numActual === numSiguiente) return false
+    if (this.enAnimacion || this.numActual === numSiguiente) return false
 
     const digitoPorPoner = !this.dActual ? this.caja1Html : this.caja2Html
 
