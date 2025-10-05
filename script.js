@@ -8,6 +8,32 @@ const arrFeriados = [
 ]
 const arrJornadas = [new Date(2025, 9, 21), new Date(2025, 10, 26)]
 
+/*
+ * Formato:
+ * {
+ *  dia: new Date(2025, mes, dia),
+ *  horario: [{
+ *    materia: 'lorem ipsum',
+ *    horarioComienzo: 'xx:xx',
+ *    horarioFin: 'xx:xx'
+ *  },
+ *  ...
+ * ]
+ * }
+ */
+const cambioHorarioClases = [
+  {
+    dia: new Date(2025, 9, 15),
+    horario: [
+      {
+        materia: 'Salida a MEGA',
+        horarioComienzo: '07:00',
+        horarioFin: '14:00'
+      }
+    ]
+  }
+]
+
 const horarioClases = [
   { dia: 'Domingo', horario: [] },
   {
@@ -367,7 +393,27 @@ function obtenerTiempoRestante() {
         mesAct++
       }
       const diaSiguiente = new Date(2025, mesAct, diaAct)
-      const arrHorarios = horarioClases[diaSiguiente.getDay()].horario
+
+      let arrHorarios
+
+      let indexDiaCambio = -1
+
+      for (let i = 0; i < cambioHorarioClases.length; i++) {
+        if (
+          cambioHorarioClases[i].dia.getMonth() === mesAct &&
+          cambioHorarioClases[i].dia.getDate() === diaAct
+        ) {
+          indexDiaCambio = i
+          break
+        }
+      }
+
+      if (indexDiaCambio === -1) {
+        arrHorarios = horarioClases[diaSiguiente.getDay()].horario
+      } else {
+        arrHorarios = cambioHorarioClases[indexDiaCambio].horario
+      }
+
       if (!primeraPasada) console.log(horarioClases[diaSiguiente.getDay()].dia)
       if (
         diaSiguiente.getDay() === 0 ||
