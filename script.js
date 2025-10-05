@@ -401,12 +401,16 @@ function obtenerTiempoRestante() {
       horasActuales = finClases.getHours()
       minutosActuales = finClases.getMinutes()
       segundosActuales = finClases.getSeconds()
-      paroDeTiempoHtml.innerText =
+
+      let strParoDeTiempo =
         hoyJornadaOFeriado === 1
           ? 'EN FERIADO'
           : hoyJornadaOFeriado === 2
           ? 'EN JORNADA'
           : 'EN FIN DE SEMANA'
+
+      if (paroDeTiempoHtml.innerText !== strParoDeTiempo)
+        paroDeTiempoHtml.innerText = strParoDeTiempo
 
       arrDigitosSegundos[0].cambio(obtenerDigito(segundosActuales, 1))
       arrDigitosSegundos[1].cambio(obtenerDigito(segundosActuales, 0))
@@ -528,11 +532,16 @@ function obtenerTiempoRestante() {
 
     const materiaAct = materiaActual()
 
+    let strParoDeTiempo
+
     if (!materiaAct) {
-      paroDeTiempoHtml.innerText = 'SIN CLASES'
+      strParoDeTiempo = 'SIN CLASES'
     } else {
-      paroDeTiempoHtml.innerText = `EN ${materiaAct.materia.toUpperCase()}`
+      strParoDeTiempo = `EN ${materiaAct.materia.toUpperCase()}`
     }
+
+    if (paroDeTiempoHtml.innerText !== strParoDeTiempo)
+      paroDeTiempoHtml.innerText = strParoDeTiempo
 
     // timerParado = !materiaActual ? true : false
   }
@@ -655,7 +664,8 @@ tituloDiasHtml.addEventListener('click', () => {
       strTituloDias = 'HORAS CLASE'
       break
   }
-  tituloDiasHtml.innerText = strTituloDias
+  if (tituloDiasHtml.innerText !== strTituloDias)
+    tituloDiasHtml.innerText = strTituloDias
   soloDia = true
   obtenerTiempoRestante()
   soloDia = false
