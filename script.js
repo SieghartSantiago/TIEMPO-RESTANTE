@@ -28,10 +28,10 @@ const cambioHorarioClases = [
       {
         materia: 'Salida a MEGA',
         horarioComienzo: '07:00',
-        horarioFin: '14:00'
-      }
-    ]
-  }
+        horarioFin: '14:00',
+      },
+    ],
+  },
 ]
 
 const horarioClases = [
@@ -188,6 +188,44 @@ const horarioClases = [
     horario: [],
   },
 ]
+
+function setDoubleDigitFavicon(leftDigit, rightDigit) {
+  const canvas = document.createElement('canvas')
+  canvas.width = 64
+  canvas.height = 64
+  const ctx = canvas.getContext('2d')
+
+  // Fondo negro con división central
+  ctx.fillStyle = '#111'
+  ctx.fillRect(0, 0, 64, 64)
+  ctx.strokeStyle = '#333'
+  ctx.lineWidth = 2
+  ctx.beginPath()
+  ctx.moveTo(32, 0)
+  ctx.lineTo(32, 64)
+  ctx.stroke()
+
+  // Números rojos estilo digital
+  ctx.fillStyle = '#f01515'
+  ctx.font = 'bold 36px "Courier Prime", monospace'
+  ctx.textAlign = 'center'
+  ctx.textBaseline = 'middle'
+
+  // Izquierda
+  ctx.fillText(leftDigit, 16, 34)
+  // Derecha
+  ctx.fillText(rightDigit, 48, 34)
+
+  // Convertir a imagen y aplicar como favicon
+  const faviconURL = canvas.toDataURL('image/png')
+  let link = document.querySelector("link[rel*='icon']")
+  if (!link) {
+    link = document.createElement('link')
+    link.rel = 'icon'
+    document.head.appendChild(link)
+  }
+  link.href = faviconURL
+}
 
 // convierte "HH:MM" a minutos desde medianoche
 function aMinutos(hora) {
@@ -532,6 +570,24 @@ function actualizarContador() {
 
   arrDigitosDias[0].cambio(obtenerDigito(diasActuales, 1))
   arrDigitosDias[1].cambio(obtenerDigito(diasActuales, 0))
+
+  let numIzq, numDer
+
+  if (diasActuales > 0) {
+    numIzq = obtenerDigito(diasActuales, 1)
+    numDer = obtenerDigito(diasActuales, 0)
+  } else if (horasActuales > 0) {
+    numIzq = obtenerDigito(horasActuales, 1)
+    numDer = obtenerDigito(horasActuales, 0)
+  } else if (minutosActuales > 0) {
+    numIzq = obtenerDigito(minutosActuales, 1)
+    numDer = obtenerDigito(minutosActuales, 0)
+  } else {
+    numIzq = obtenerDigito(segundosActuales, 1)
+    numDer = obtenerDigito(segundosActuales, 0)
+  }
+
+  setDoubleDigitFavicon(numIzq, numDer)
 }
 
 obtenerTiempoRestante()
