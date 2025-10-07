@@ -324,7 +324,23 @@ function materiaActual() {
 
   const ahora = new Date()
   const dia = diasSemana[ahora.getDay()] // nombre del día actual
-  const clasesHoy = horarioClases.find((d) => d.dia === dia)
+
+  let horarioObj
+  let clasesHoy
+
+  const cambio = cambioHorarioClases.find(
+    (c) =>
+      c.dia.getDate() === ahora.getDate() &&
+      c.dia.getMonth() === ahora.getMonth()
+  )
+
+  if (cambio) {
+    horarioObj = cambio
+    clasesHoy = horarioObj
+  } else {
+    horarioObj = horarioClases
+    clasesHoy = horarioObj.find((d) => d.dia === dia)
+  }
 
   if (!clasesHoy || clasesHoy.horario.length === 0) return false
 
