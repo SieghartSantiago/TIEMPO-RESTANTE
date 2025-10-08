@@ -9,6 +9,7 @@
   --altura-digito: 60px;
   --ancho-digito: calc(var(--altura-digito) / 2);
   --tamanio-digito: 2.3rem;
+  --tiempo-transicion: 0.5s;
 }
 
 body {
@@ -112,7 +113,7 @@ body {
 }
 
 .digitoActual {
-  transition: transform 0.5s linear;
+  transition: transform var(--tiempo-transicion) linear;
   transform: rotateX(0) translateY(0) translateZ(0);
 }
 
@@ -122,7 +123,7 @@ body {
 }
 
 .digitoAfuera {
-  transition: transform 0.5s linear;
+  transition: transform var(--tiempo-transicion) linear;
   transform: rotateX(90deg) translateY(-30px) translateZ(30px);
 }
 

@@ -411,9 +411,6 @@ function horarioAMs(inicio, fin) {
   return finMs - inicioMs // diferencia en ms
 }
 
-let soloDia = false
-// let timerParado = false
-
 /*
  * 0 => Dias Totales
  * 1 => Dias Escuela
@@ -695,7 +692,7 @@ function cambiarSegundo() {
   actualizarContador()
   setTimeout(() => {
     cambiarSegundo()
-  }, 100)
+  }, 1000 - new Date().getMilliseconds())
 }
 
 function obtenerDigito(num, digito) {
@@ -766,12 +763,38 @@ tituloDiasHtml.addEventListener('click', () => {
   }
   if (tituloDiasHtml.innerText !== strTituloDias)
     tituloDiasHtml.innerText = strTituloDias
-  soloDia = true
-  obtenerTiempoRestante()
-  soloDia = false
 
-  arrDigitosDias[0].cambio(obtenerDigito(diasActuales, 1))
-  arrDigitosDias[1].cambio(obtenerDigito(diasActuales, 0))
+  obtenerTiempoRestante()
+
+  arrDigitosSegundos[0].cambio(obtenerDigito(segundosActuales, 1), true)
+  arrDigitosSegundos[1].cambio(obtenerDigito(segundosActuales, 0), true)
+
+  arrDigitosMinutos[0].cambio(obtenerDigito(minutosActuales, 1), true)
+  arrDigitosMinutos[1].cambio(obtenerDigito(minutosActuales, 0), true)
+
+  arrDigitosHoras[0].cambio(obtenerDigito(horasActuales, 1), true)
+  arrDigitosHoras[1].cambio(obtenerDigito(horasActuales, 0), true)
+
+  arrDigitosDias[0].cambio(obtenerDigito(diasActuales, 1), true)
+  arrDigitosDias[1].cambio(obtenerDigito(diasActuales, 0), true)
+
+  let numIzq, numDer
+
+  if (diasActuales > 0) {
+    numIzq = obtenerDigito(diasActuales, 1)
+    numDer = obtenerDigito(diasActuales, 0)
+  } else if (horasActuales > 0) {
+    numIzq = obtenerDigito(horasActuales, 1)
+    numDer = obtenerDigito(horasActuales, 0)
+  } else if (minutosActuales > 0) {
+    numIzq = obtenerDigito(minutosActuales, 1)
+    numDer = obtenerDigito(minutosActuales, 0)
+  } else {
+    numIzq = obtenerDigito(segundosActuales, 1)
+    numDer = obtenerDigito(segundosActuales, 0)
+  }
+
+  setDoubleDigitFavicon(numIzq, numDer)
 })
 
 cambiarSegundo()

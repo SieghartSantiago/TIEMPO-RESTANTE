@@ -28,8 +28,9 @@ class Digito {
     return contenedorHtml
   }
 
-  cambio(numSiguiente) {
-    if (this.enAnimacion || this.numActual === numSiguiente) return false
+  cambio(numSiguiente, cambioForzado = false) {
+    if (this.enAnimacion || (this.numActual === numSiguiente && !cambioForzado))
+      return false
 
     const digitoPorPoner = !this.dActual ? this.caja1Html : this.caja2Html
 
