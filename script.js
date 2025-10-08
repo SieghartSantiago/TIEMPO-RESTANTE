@@ -50,6 +50,33 @@ const cambioHorarioClases = [
     horario: [],
   },
   {
+    dia: new Date(2025, 9, 8),
+    horario: [
+      {
+        materia: 'Computadoras Electronicas',
+        horarioComienzo: '08:00',
+        horarioFin: '09:20',
+      },
+      {
+        materia: 'Sistemas de Comunicaciones',
+        horarioComienzo: '09:30',
+        horarioFin: '10:50',
+      },
+      {
+        materia: 'CAD CAM',
+        horarioComienzo: '14:30',
+        horarioFin: '15:45',
+        semanaPorMedio: true,
+      },
+      {
+        materia: 'CAD CAM',
+        horarioComienzo: '16:00',
+        horarioFin: '17:20',
+        semanaPorMedio: true,
+      },
+    ],
+  },
+  {
     dia: new Date(2025, 9, 15),
     horario: [
       {
