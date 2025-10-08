@@ -29,7 +29,7 @@ const cambioHorarioClases = [
     dia: new Date(2025, 9, 6),
     horario: [
       {
-        materia: 'Sistemas de TV',
+        materia: 'Sistemas de Televisión',
         horarioComienzo: '08:00',
         horarioFin: '09:20',
       },
@@ -39,7 +39,7 @@ const cambioHorarioClases = [
         horarioFin: '10:50',
       },
       {
-        materia: 'Computadoras Electronicas',
+        materia: 'Computadoras Electrónicas',
         horarioComienzo: '11:00',
         horarioFin: '12:20',
       },
@@ -53,12 +53,12 @@ const cambioHorarioClases = [
     dia: new Date(2025, 9, 8),
     horario: [
       {
-        materia: 'Computadoras Electronicas',
+        materia: 'Computadoras Electrónicas',
         horarioComienzo: '08:00',
         horarioFin: '09:20',
       },
       {
-        materia: 'Sistemas de Comunicaciones',
+        materia: 'Sistemas de Comunicación',
         horarioComienzo: '09:30',
         horarioFin: '10:50',
       },
@@ -94,7 +94,7 @@ const horarioClases = [
     dia: 'Lunes',
     horario: [
       {
-        materia: 'Sistemas de TV',
+        materia: 'Sistemas de Televisión',
         horarioComienzo: '08:00',
         horarioFin: '09:20',
       },
@@ -104,7 +104,7 @@ const horarioClases = [
         horarioFin: '10:50',
       },
       {
-        materia: 'Computadoras Electronicas',
+        materia: 'Computadoras Electrónicas',
         horarioComienzo: '11:00',
         horarioFin: '12:20',
       },
@@ -129,12 +129,12 @@ const horarioClases = [
         horarioFin: '9:20',
       },
       {
-        materia: 'Organizacion Industrial',
+        materia: 'Organización Industrial',
         horarioComienzo: '09:30',
         horarioFin: '10:50',
       },
       {
-        materia: 'Educacion Fisica',
+        materia: 'Educación Física',
         horarioComienzo: '14:00',
         horarioFin: '15:00',
       },
@@ -144,7 +144,7 @@ const horarioClases = [
     dia: 'Miercoles',
     horario: [
       {
-        materia: 'Computadoras Electronicas',
+        materia: 'Computadoras Electrónicas',
         horarioComienzo: '08:00',
         horarioFin: '09:20',
       },
@@ -154,7 +154,7 @@ const horarioClases = [
         horarioFin: '10:50',
       },
       {
-        materia: 'Sistemas de Comunicaciones',
+        materia: 'Sistemas de Comunicación',
         horarioComienzo: '11:00',
         horarioFin: '12:20',
       },
@@ -176,17 +176,17 @@ const horarioClases = [
     dia: 'Jueves',
     horario: [
       {
-        materia: 'Sistemas de TV',
+        materia: 'Sistemas de Televisión',
         horarioComienzo: '08:00',
         horarioFin: '09:20',
       },
       {
-        materia: 'Sistemas de Comunicaciones',
+        materia: 'Sistemas de Comunicación',
         horarioComienzo: '09:30',
         horarioFin: '10:50',
       },
       {
-        materia: 'Ingles',
+        materia: 'Inglés',
         horarioComienzo: '11:00',
         horarioFin: '13:00',
       },
@@ -206,12 +206,12 @@ const horarioClases = [
     dia: 'Viernes',
     horario: [
       {
-        materia: 'Computadoras Electronicas',
+        materia: 'Computadoras Electrónicas',
         horarioComienzo: '08:00',
         horarioFin: '09:20',
       },
       {
-        materia: 'Sistemas de Comunicaciones',
+        materia: 'Sistemas de Comunicación',
         horarioComienzo: '09:30',
         horarioFin: '10:50',
       },
@@ -221,7 +221,7 @@ const horarioClases = [
         horarioFin: '12:20',
       },
       {
-        materia: 'Educacion Fisica',
+        materia: 'Educación Física',
         horarioComienzo: '12:45',
         horarioFin: '13:45',
       },
