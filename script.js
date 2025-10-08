@@ -243,7 +243,8 @@ const horarioClases = [
   },
 ]
 
-let modoMaterias = -1
+let modoMaterias = -1,
+  modoMateriasAnt = -2
 const arrNombresMaterias = []
 
 for (let i = 0; i < horarioClases.length; i++) {
@@ -262,7 +263,8 @@ for (let i = 0; i < cambioHorarioClases.length; i++) {
   for (let m = 0; m < cambioHorarioClases[i].horario.length; m++) {
     if (
       !arrNombresMaterias.some(
-        (nombre) => nombre === cambioHorarioClases[i].horario[m].materia.toUpperCase()
+        (nombre) =>
+          nombre === cambioHorarioClases[i].horario[m].materia.toUpperCase()
       )
     ) {
       arrNombresMaterias.push(
@@ -627,7 +629,11 @@ function obtenerTiempoRestante() {
 
       // Sumar tiempo de clases de ese día
       for (const materia of horarioDia) {
-        if (modoMaterias !== -1 && materia.materia.toUpperCase() !== arrNombresMaterias[modoMaterias]) continue
+        if (
+          modoMaterias !== -1 &&
+          materia.materia.toUpperCase() !== arrNombresMaterias[modoMaterias]
+        )
+          continue
         let inicio = aMinutos(materia.horarioComienzo) * 60 * 1000
         let fin = aMinutos(materia.horarioFin) * 60 * 1000
 
@@ -707,17 +713,43 @@ function obtenerTiempoRestante() {
     })
   }
 
-  arrDigitosSegundos[0].cambio(obtenerDigito(segundosActuales, 1))
-  arrDigitosSegundos[1].cambio(obtenerDigito(segundosActuales, 0))
+  arrDigitosSegundos[0].cambio(
+    obtenerDigito(segundosActuales, 1),
+    modoContador === 2 && modoMaterias !== modoMateriasAnt
+  )
+  arrDigitosSegundos[1].cambio(
+    obtenerDigito(segundosActuales, 0),
+    modoContador === 2 && modoMaterias !== modoMateriasAnt
+  )
 
-  arrDigitosMinutos[0].cambio(obtenerDigito(minutosActuales, 1))
-  arrDigitosMinutos[1].cambio(obtenerDigito(minutosActuales, 0))
+  arrDigitosMinutos[0].cambio(
+    obtenerDigito(minutosActuales, 1),
+    modoContador === 2 && modoMaterias !== modoMateriasAnt
+  )
+  arrDigitosMinutos[1].cambio(
+    obtenerDigito(minutosActuales, 0),
+    modoContador === 2 && modoMaterias !== modoMateriasAnt
+  )
 
-  arrDigitosHoras[0].cambio(obtenerDigito(horasActuales, 1))
-  arrDigitosHoras[1].cambio(obtenerDigito(horasActuales, 0))
+  arrDigitosHoras[0].cambio(
+    obtenerDigito(horasActuales, 1),
+    modoContador === 2 && modoMaterias !== modoMateriasAnt
+  )
+  arrDigitosHoras[1].cambio(
+    obtenerDigito(horasActuales, 0),
+    modoContador === 2 && modoMaterias !== modoMateriasAnt
+  )
 
-  arrDigitosDias[0].cambio(obtenerDigito(diasActuales, 1))
-  arrDigitosDias[1].cambio(obtenerDigito(diasActuales, 0))
+  arrDigitosDias[0].cambio(
+    obtenerDigito(diasActuales, 1),
+    modoContador === 2 && modoMaterias !== modoMateriasAnt
+  )
+  arrDigitosDias[1].cambio(
+    obtenerDigito(diasActuales, 0),
+    modoContador === 2 && modoMaterias !== modoMateriasAnt
+  )
+
+  modoMateriasAnt = modoMaterias
 
   if (modoContador === 2) {
     const materiaAct = materiaActual()
