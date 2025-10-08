@@ -243,6 +243,53 @@ const horarioClases = [
   },
 ]
 
+let modoMaterias = -1
+const arrNombresMaterias = []
+
+for (let i = 0; i < horarioClases.length; i++) {
+  for (let m = 0; m < horarioClases[i].horario.length; m++) {
+    if (
+      !arrNombresMaterias.some(
+        (nombre) => nombre === horarioClases[i].horario[m].materia.toUpperCase()
+      )
+    ) {
+      arrNombresMaterias.push(horarioClases[i].horario[m].materia.toUpperCase())
+    }
+  }
+}
+
+for (let i = 0; i < cambioHorarioClases.length; i++) {
+  for (let m = 0; m < cambioHorarioClases[i].horario.length; m++) {
+    if (
+      !arrNombresMaterias.some(
+        (nombre) => nombre === cambioHorarioClases[i].horario[m].materia.toUpperCase()
+      )
+    ) {
+      arrNombresMaterias.push(
+        cambioHorarioClases[i].horario[m].materia.toUpperCase()
+      )
+    }
+  }
+}
+
+arrNombresMaterias.sort()
+
+const selectMateriaHtml = document.getElementById('select-materia')
+selectMateriaHtml.style.opacity = 0
+selectMateriaHtml.style.pointerEvents = 'none'
+
+for (let i = -1; i < arrNombresMaterias.length; i++) {
+  const optionMateriaHtml = document.createElement('option')
+  optionMateriaHtml.value = i
+  if (i === -1) {
+    optionMateriaHtml.innerText = 'TOTAL'
+  } else {
+    optionMateriaHtml.innerText = arrNombresMaterias[i]
+  }
+
+  selectMateriaHtml.appendChild(optionMateriaHtml)
+}
+
 // convierte "HH:MM" a minutos desde medianoche
 function aMinutos(hora) {
   const [h, m] = hora.split(':').map(Number)
@@ -580,6 +627,7 @@ function obtenerTiempoRestante() {
 
       // Sumar tiempo de clases de ese día
       for (const materia of horarioDia) {
+        if (modoMaterias !== -1 && materia.materia.toUpperCase() !== arrNombresMaterias[modoMaterias]) continue
         let inicio = aMinutos(materia.horarioComienzo) * 60 * 1000
         let fin = aMinutos(materia.horarioFin) * 60 * 1000
 
@@ -679,7 +727,7 @@ function obtenerTiempoRestante() {
     if (!materiaAct) {
       strParoDeTiempo = 'SIN CLASES'
     } else {
-      strParoDeTiempo = `EN ${materiaAct.materia.toUpperCase()}`
+      strParoDeTiempo = `CLASE ACTUAL: ${materiaAct.materia.toUpperCase()}`
     }
 
     if (paroDeTiempoHtml.innerText !== strParoDeTiempo)
@@ -761,6 +809,10 @@ tituloDiasHtml.addEventListener('click', () => {
       strTituloDias = 'DIAS CLASE'
       break
   }
+
+  selectMateriaHtml.style.opacity = modoContador === 2 ? 1 : 0
+  selectMateriaHtml.style.pointerEvents = modoContador === 2 ? 'all' : 'none'
+
   if (tituloDiasHtml.innerText !== strTituloDias)
     tituloDiasHtml.innerText = strTituloDias
 
@@ -795,6 +847,11 @@ tituloDiasHtml.addEventListener('click', () => {
   }
 
   setDoubleDigitFavicon(numIzq, numDer)
+})
+
+selectMateriaHtml.addEventListener('input', () => {
+  modoMaterias = parseInt(selectMateriaHtml.value)
+  obtenerTiempoRestante()
 })
 
 cambiarSegundo()
