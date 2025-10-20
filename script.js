@@ -106,6 +106,31 @@ const cambioHorarioClases = [
       },
     ],
   },
+  {
+    dia: new Date(2025, 9, 27),
+    horario: [
+      {
+        materia: 'Sistemas de Televisión',
+        horarioComienzo: '08:00',
+        horarioFin: '09:20',
+      },
+      {
+        materia: 'Laboratorio de Computadoras',
+        horarioComienzo: '09:30',
+        horarioFin: '10:50',
+      },
+      {
+        materia: 'Sistemas de Control',
+        horarioComienzo: '13:30',
+        horarioFin: '14:50',
+      },
+      {
+        materia: 'Laboratorio de Computadoras',
+        horarioComienzo: '15:00',
+        horarioFin: '16:20',
+      },
+    ],
+  },
 ]
 
 const horarioClases = [
