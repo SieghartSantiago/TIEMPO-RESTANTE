@@ -812,12 +812,15 @@ function obtenerTiempoRestante() {
   }
 }
 
+let primeraPasada = true
+
 function cambiarSegundo() {
   obtenerTiempoRestante()
   actualizarContador()
   setTimeout(() => {
+    primeraPasada = false
     cambiarSegundo()
-  }, 1000 - new Date().getMilliseconds())
+  }, primeraPasada ? 1000 - new Date().getMilliseconds() : 200)
 }
 
 function obtenerDigito(num, digito) {
