@@ -140,14 +140,14 @@ const cambioHorarioClases = [
     dia: new Date(2025, 9, 27),
     horario: [
       {
-        materia: 'Sistemas de Televisión',
-        horarioComienzo: '08:00',
-        horarioFin: '09:20',
-      },
-      {
         materia: 'Laboratorio de Computadoras',
         horarioComienzo: '09:30',
         horarioFin: '10:50',
+      },
+      {
+        materia: 'Sistemas de Televisión',
+        horarioComienzo: '11:00',
+        horarioFin: '12:20',
       },
       {
         materia: 'Sistemas de Control',
