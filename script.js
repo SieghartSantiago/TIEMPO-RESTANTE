@@ -107,6 +107,36 @@ const cambioHorarioClases = [
     ],
   },
   {
+    dia: new Date(2025, 9, 23),
+    horario: [
+      {
+        materia: 'Sistemas de Comunicación',
+        horarioComienzo: '09:30',
+        horarioFin: '10:50',
+      },
+      {
+        materia: 'Sistemas de Control',
+        horarioComienzo: '11:00',
+        horarioFin: '12:20',
+      },
+      {
+        materia: 'Educación Física',
+        horarioComienzo: '12:45',
+        horarioFin: '13:45',
+      },
+      {
+        materia: 'CAD CAM',
+        horarioComienzo: '14:30',
+        horarioFin: '16:30',
+      },
+      {
+        materia: 'CAD CAM',
+        horarioComienzo: '17:00',
+        horarioFin: '18:10',
+      },
+    ],
+  },
+  {
     dia: new Date(2025, 9, 27),
     horario: [
       {
@@ -817,10 +847,13 @@ let primeraPasada = true
 function cambiarSegundo() {
   obtenerTiempoRestante()
   actualizarContador()
-  setTimeout(() => {
-    primeraPasada = false
-    cambiarSegundo()
-  }, primeraPasada ? 1000 - new Date().getMilliseconds() : 200)
+  setTimeout(
+    () => {
+      primeraPasada = false
+      cambiarSegundo()
+    },
+    primeraPasada ? 1000 - new Date().getMilliseconds() : 200
+  )
 }
 
 function obtenerDigito(num, digito) {
