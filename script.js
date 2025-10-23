@@ -107,7 +107,7 @@ const cambioHorarioClases = [
     ],
   },
   {
-    dia: new Date(2025, 9, 23),
+    dia: new Date(2025, 9, 24),
     horario: [
       {
         materia: 'Sistemas de Comunicación',
