@@ -161,6 +161,21 @@ const cambioHorarioClases = [
       },
     ],
   },
+  {
+    dia: new Date(2025, 9, 28),
+    horario: [
+      {
+        materia: 'Sistemas de Control',
+        horarioComienzo: '08:00',
+        horarioFin: '9:20',
+      },
+      {
+        materia: 'Organización Industrial',
+        horarioComienzo: '09:30',
+        horarioFin: '10:50',
+      },
+    ],
+  },
 ]
 
 const horarioClases = [
