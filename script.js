@@ -513,6 +513,10 @@ function materiaActual() {
   const minutosAhora = ahora.getHours() * 60 + ahora.getMinutes()
 
   for (const clase of clasesHoy.horario) {
+    if (clase.semanaPorMedio && !esMiercolesConTaller(ahora)) {
+      continue
+    }
+
     const inicio = aMinutos(clase.horarioComienzo)
     const fin = aMinutos(clase.horarioFin)
 
