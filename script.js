@@ -176,6 +176,16 @@ const cambioHorarioClases = [
       },
     ],
   },
+  {
+    dia: new Date(2025, 10, 20),
+    horario: [
+      {
+        materia: 'Expo ITC',
+        horarioComienzo: '09:00',
+        horarioFin: '18:00',
+      },
+    ],
+  },
 ]
 
 const horarioClases = [
