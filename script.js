@@ -382,6 +382,7 @@ selectMateriaHtml.style.pointerEvents = 'none'
 
 for (let i = -1; i < arrNombresMaterias.length; i++) {
   const optionMateriaHtml = document.createElement('option')
+  optionMateriaHtml.classList.add('option-materia')
   optionMateriaHtml.value = i
   if (i === -1) {
     optionMateriaHtml.innerText = 'TOTAL'

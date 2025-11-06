@@ -46,6 +46,11 @@ body {
   margin-bottom: 5px;
 }
 
+.option-materia {
+  background-color: #555;
+  font-weight: bold;
+}
+
 .paro-de-tiempo {
   color: #aaa;
   font-family: monospace;
