@@ -157,3 +157,27 @@ body {
   max-width: calc(var(--ancho-digito) * 2);
   cursor: pointer;
 }
+
+.input-cambio {
+  background-color: transparent;
+  border: none;
+  color: #aaa;
+  font-family: monospace;
+}
+
+.input-cambio.error {
+  color: #f01515;
+}
+
+.cambiar-fecha-btn {
+  background-color: transparent;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  color: #aaa;
+  font-family: monospace;
+}
+
+.cambiar-fecha-btn.pulsado {
+  background-color: #aaa;
+  color: #555;
+}

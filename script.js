@@ -1,5 +1,68 @@
 //* 28 de noviembre
-const finClases = new Date(2025, 10, 28, 18, 10, 0)
+const finClasesOriginal = new Date(2025, 10, 28, 18, 10, 0)
+let finClases = new Date(finClasesOriginal)
+
+const btnCambiarFechaHtml = document.getElementById('cambiar-fecha-btn')
+const inputDateHtml = document.getElementById('input-date')
+const inputTimeHtml = document.getElementById('input-time')
+
+btnCambiarFechaHtml.addEventListener('click', (e) => {
+  e.preventDefault()
+  if (btnCambiarFechaHtml.classList.contains('pulsado')) {
+    btnCambiarFechaHtml.classList.remove('pulsado')
+    btnCambiarFechaHtml.innerText = 'Cambiar'
+    finClases = new Date(finClasesOriginal)
+    document.getElementById(
+      'fecha-final'
+    ).innerText = `${finClases.toLocaleDateString()} ${dosDigitos(
+      finClases.getHours()
+    )}:${dosDigitos(finClases.getMinutes())}:${dosDigitos(
+      finClases.getSeconds()
+    )}`
+    return
+  }
+  const fecha = inputDateHtml.value
+  const hora = inputTimeHtml.value
+
+  if (!fecha) {
+    for (let i = 0; i < 4; i++) {
+      setTimeout(() => {
+        if (inputDateHtml.classList.contains('error')) {
+          inputDateHtml.classList.remove('error')
+        } else {
+          inputDateHtml.classList.add('error')
+        }
+      }, 200 * i)
+    }
+  }
+
+  if (!hora) {
+    for (let i = 0; i < 4; i++) {
+      setTimeout(() => {
+        if (inputTimeHtml.classList.contains('error')) {
+          inputTimeHtml.classList.remove('error')
+        } else {
+          inputTimeHtml.classList.add('error')
+        }
+      }, 200 * i)
+    }
+  }
+
+  if (!fecha || !hora) {
+    return
+  }
+
+  btnCambiarFechaHtml.classList.add('pulsado')
+  btnCambiarFechaHtml.innerText = 'Volver'
+  finClases = new Date(`${fecha}T${hora}`)
+  document.getElementById(
+    'fecha-final'
+  ).innerText = `${finClases.toLocaleDateString()} ${dosDigitos(
+    finClases.getHours()
+  )}:${dosDigitos(finClases.getMinutes())}:${dosDigitos(
+    finClases.getSeconds()
+  )}`
+})
 
 const arrFeriados = [
   new Date(2025, 9, 10),
