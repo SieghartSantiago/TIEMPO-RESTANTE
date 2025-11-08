@@ -158,11 +158,21 @@ body {
   cursor: pointer;
 }
 
+.container-cambiar-fecha {
+  display: flex;
+}
+
 .input-cambio {
   background-color: transparent;
   border: none;
   color: #aaa;
   font-family: monospace;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .input-cambio.error {
@@ -175,6 +185,7 @@ body {
   border-radius: 5px;
   color: #aaa;
   font-family: monospace;
+  height: 20px;
 }
 
 .cambiar-fecha-btn.pulsado {
