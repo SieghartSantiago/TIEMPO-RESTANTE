@@ -244,8 +244,8 @@ const cambioHorarioClases = [
     horario: [
       {
         materia: 'Expo ITC',
-        horarioComienzo: '17:00',
-        horarioFin: '20:00',
+        horarioComienzo: '16:00',
+        horarioFin: '18:30',
       },
     ],
   },
