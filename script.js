@@ -240,6 +240,33 @@ const cambioHorarioClases = [
     ],
   },
   {
+    dia: new Date(2025, 10, 19),
+    horario: [
+      {
+        materia: 'Relaciones Humanas',
+        horarioComienzo: '09:30',
+        horarioFin: '10:50',
+      },
+      {
+        materia: 'Sistemas de Comunicación',
+        horarioComienzo: '11:00',
+        horarioFin: '12:20',
+      },
+      {
+        materia: 'CAD CAM',
+        horarioComienzo: '14:30',
+        horarioFin: '15:45',
+        semanaPorMedio: true,
+      },
+      {
+        materia: 'CAD CAM',
+        horarioComienzo: '16:00',
+        horarioFin: '17:20',
+        semanaPorMedio: true,
+      },
+    ],
+  },
+  {
     dia: new Date(2025, 10, 20),
     horario: [
       {
