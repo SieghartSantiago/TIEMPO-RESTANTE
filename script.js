@@ -749,11 +749,11 @@ function obtenerTiempoRestante() {
     let diasSinClases = 0
 
     arrJornadas.forEach((dia) => {
-      if (finClases > dia) diasSinClases++
+      if (finClases > dia && dia > ahora) diasSinClases++
     })
 
     arrFeriados.forEach((dia) => {
-      if (finClases > dia) diasSinClases++
+      if (finClases > dia && dia > ahora) diasSinClases++
     })
 
     diasActuales -= diasSinClases
